@@ -1,0 +1,12 @@
+{
+  "name": "palindrome-service",
+  "version": "1.0.0",
+  "description": "CRUD service for palindrome messages",
+  "license": "ISC",
+  "author": "Yohanna",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
