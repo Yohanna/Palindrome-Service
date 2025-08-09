@@ -46,7 +46,6 @@ app.post('/messages', (req, res) => {
 app.get('/messages', (req, res) => {
   console.log(`GET /messages received`);
   
-  const messages = []; // temporary empty array
   console.log(`Returning messages:`, messages);
   res.status(200).json(messages);
 });
@@ -58,8 +57,14 @@ app.get('/messages/:id', (req, res) => {
   const { id } = req.params;
   console.log(`Looking for message with id: ${id}`);
   
-  // For now, return 404 since we're not storing data
-  res.status(404).json({ error: 'Message not found' });
+  const message = messages.find(msg => msg.id == id);
+  
+  if (!message) {
+    return res.status(404).json({ error: 'Message not found' });
+  }
+  
+  console.log(`Found message:`, message);
+  res.status(200).json(message);
 });
 
 // PUT /messages/:id - Update message
@@ -73,10 +78,19 @@ app.put('/messages/:id', (req, res) => {
     return res.status(400).json({ error: 'Message content must be a non-empty string' });
   }
 
-  console.log(`Would update message ${id} with content: ${content}`);
+  const message = messages.find(msg => msg.id == id);
   
-  // For now, return 404 since we're not storing data
-  res.status(404).json({ error: 'Message not found' });
+  if (!message) {
+    return res.status(404).json({ error: 'Message not found' });
+  }
+
+  const trimmedContent = content.trim();
+  message.content = trimmedContent;
+  message.isPalindrome = isPalindrome(trimmedContent);
+  message.updatedAt = new Date().toISOString();
+
+  console.log(`Updated message:`, message);
+  res.status(200).json(message);
 });
 
 // DELETE /messages/:id - Delete message
@@ -84,10 +98,17 @@ app.delete('/messages/:id', (req, res) => {
   console.log(`DELETE /messages/${req.params.id} received`);
   
   const { id } = req.params;
-  console.log(`Would delete message with id: ${id}`);
+  console.log(`Looking for message with id: ${id}`);
   
-  // For now, return 404 since we're not storing data
-  res.status(404).json({ error: 'Message not found' });
+  const messageIndex = messages.findIndex(msg => msg.id == id);
+  
+  if (messageIndex === -1) {
+    return res.status(404).json({ error: 'Message not found' });
+  }
+
+  const deletedMessage = messages.splice(messageIndex, 1)[0];
+  console.log(`Deleted message:`, deletedMessage);
+  res.status(200).json(deletedMessage);
 });
 
 // Only start server if this file is run directly (not imported) to avoid tests not terminating
