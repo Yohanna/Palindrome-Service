@@ -4,6 +4,10 @@ import { isPalindrome } from './palindrome.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// In-memory storage
+let messages = [];
+let nextId = 1;
+
 app.use(express.json());
 
 app.get('/health', (req, res) => {
@@ -24,13 +28,16 @@ app.post('/messages', (req, res) => {
     return res.status(400).json({ error: 'Message content must be a non-empty string' });
   }
 
+  const trimmedContent = content.trim();
   const message = {
-    id: Date.now(), // temporary ID
-    content: content.trim(),
-    isPalindrome: isPalindrome(content.trim()),
-    createdAt: new Date().toISOString()
+    id: nextId++,
+    content: trimmedContent,
+    isPalindrome: isPalindrome(trimmedContent),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   };
 
+  messages.push(message);
   console.log(`Created message:`, message);
   res.status(201).json(message);
 });
@@ -88,6 +95,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   app.listen(PORT, () => {
     console.log(`Palindrome service listening on port ${PORT}`);
   });
+}
+
+// Reset function for testing
+export function resetStorage() {
+  messages = [];
+  nextId = 1;
 }
 
 export default app;

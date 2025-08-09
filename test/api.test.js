@@ -1,8 +1,12 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import app from '../src/index.js';
+import app, { resetStorage } from '../src/index.js';
 
 describe('Messages API', () => {
+  // Reset storage before each test
+  beforeEach(() => {
+    resetStorage();
+  });
   describe('POST /messages', () => {
     it('should create a message with palindrome detection', async () => {
       const response = await request(app)
@@ -16,6 +20,7 @@ describe('Messages API', () => {
       });
       expect(response.body).to.have.property('id');
       expect(response.body).to.have.property('createdAt');
+      expect(response.body).to.have.property('updatedAt');
     });
 
     it('should create a message for non-palindrome', async () => {
