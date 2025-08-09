@@ -18,8 +18,14 @@ class MessageService {
     return message;
   }
 
-  getAll() {
-    return this.messages;
+  getAll(filters = {}) {
+    let filteredMessages = this.messages;
+    
+    if (filters.isPalindrome !== undefined) {
+      filteredMessages = this.messages.filter(msg => msg.isPalindrome === filters.isPalindrome);
+    }
+    
+    return filteredMessages;
   }
 
   getById(id) {

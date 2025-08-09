@@ -23,9 +23,26 @@ router.post('/', (req, res) => {
 
 // GET /messages - List all messages
 router.get('/', (req, res) => {
-  console.log(`GET /messages received`);
+  console.log(`GET /messages received`, req.query);
   
-  const messages = messageService.getAll();
+  const filters = {};
+  
+  // Parse isPalindrome query parameter
+  if (req.query.isPalindrome !== undefined) {
+    const isPalindromeParam = req.query.isPalindrome.toLowerCase();
+    
+    if (isPalindromeParam === 'true') {
+      filters.isPalindrome = true;
+    } else if (isPalindromeParam === 'false') {
+      filters.isPalindrome = false;
+    } else {
+      return res.status(400).json({ 
+        error: 'isPalindrome parameter must be "true" or "false"' 
+      });
+    }
+  }
+  
+  const messages = messageService.getAll(filters);
   console.log(`Returning messages:`, messages);
   res.status(200).json(messages);
 });
