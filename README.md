@@ -1,5 +1,10 @@
 # Palindrome Service
 
+[![Tests](https://img.shields.io/badge/tests-19%20passing-brightgreen)](#testing)
+[![Coverage](https://img.shields.io/badge/coverage-95.25%25-brightgreen)](#test-coverage)
+[![Functions](https://img.shields.io/badge/functions-100%25-brightgreen)](#test-coverage)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-blue)](#prerequisites)
+
 A RESTful API service for managing and analyzing palindrome messages. Built with Express.js following Test-Driven Development (TDD) principles and clean architecture patterns.
 
 ## Features
