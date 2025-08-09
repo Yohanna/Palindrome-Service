@@ -107,6 +107,7 @@ npm start          # Start production server
 npm run dev        # Start development server with auto-reload
 npm test           # Run all tests
 npm test:watch     # Run tests in watch mode
+npm run coverage   # Run tests with coverage report
 ```
 
 
@@ -248,6 +249,15 @@ GET /messages?isPalindrome=false
 ```bash
 npm test
 ```
+
+### Test Coverage
+```bash
+npm run coverage
+```
+
+Generate test coverage reports:
+- Detailed coverage at `coverage/index.html`
+- Current coverage: 95.25% overall with 100% function coverage
 
 ### Test Structure
 - The test suite includes 19 comprehensive tests covering all functionality
