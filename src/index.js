@@ -1,6 +1,11 @@
 import express from 'express';
 import { isPalindrome } from './palindrome.js';
 
+// Suppress console.log during tests
+if (process.env.NODE_ENV === 'test') {
+  console.log = () => {};
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
