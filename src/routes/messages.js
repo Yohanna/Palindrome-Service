@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
 
 // GET /messages - List all messages
 router.get('/', (req, res) => {
-  console.log(`GET /messages received`, req.query);
+  console.log(`GET /messages received`, JSON.stringify(req.query));
   
   const filters = {};
   
