@@ -11,7 +11,16 @@
     "test:watch": "mocha --watch ./test/**/*.js --exit",
     "coverage": "NODE_ENV=test c8 mocha test/**/*.js --exit",
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "http:health": "http :3000/health",
+    "http:messages": "http :3000/messages",
+    "http:messages:palindromes": "http :3000/messages isPalindrome==true",
+    "http:messages:non-palindromes": "http :3000/messages isPalindrome==false",
+    "http:create:palindrome": "http POST :3000/messages content=racecar",
+    "http:create:non-palindrome": "http POST :3000/messages content='hello world'",
+    "http:get:1": "http :3000/messages/1",
+    "http:update:1": "http PUT :3000/messages/1 content=level",
+    "http:delete:1": "http DELETE :3000/messages/1"
   },
   "dependencies": {
     "express": "^5.1.0"

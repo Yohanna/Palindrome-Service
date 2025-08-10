@@ -255,6 +255,16 @@ GET /messages?isPalindrome=false
 npm test
 ```
 
+### Manual API Testing
+HTTPie demo scripts (requires [HTTPie](https://httpie.io/cli)) are added in `package.json`.
+
+*Example:*
+```bash
+npm run http:create:palindrome      # Create palindrome
+npm run http:messages:palindromes   # Get palindromes only  
+npm run http:health                 # Health check
+```
+
 ### Test Coverage
 ```bash
 npm run coverage
