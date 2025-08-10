@@ -7,9 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha test/**/*.js",
-    "test:watch": "mocha --watch ./test/**/*.js",
-    "coverage": "NODE_ENV=test c8 mocha test/**/*.js",
+    "test": "NODE_ENV=test mocha test/**/*.js --exit",
+    "test:watch": "mocha --watch ./test/**/*.js --exit",
+    "coverage": "NODE_ENV=test c8 mocha test/**/*.js --exit",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
